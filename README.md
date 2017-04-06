@@ -1,6 +1,6 @@
-# TIC TAC TOE
-
 ![Think outside the box](./readme-assets/outsidethebox.jpg)
+
+# TIC TAC TOE
 
 Your mission is to build Tic Tac Toe from **scratch**!
 
