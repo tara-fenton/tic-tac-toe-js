@@ -48,3 +48,6 @@ An issue ticket on the [ada-students repo](https://git.generalassemb.ly/nyc-wdi-
 - A link to your fork of this repository with completed game
 - A link to your Tic Tac Toe on BitBalloon.
 - Completion, comfort, wins, losses, questions... you know the drill.
+
+### ❗Remember ...
+![Motivation](https://info.examtime.com/files/2014/05/motivation-to-study1.jpg)
