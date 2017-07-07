@@ -2,20 +2,18 @@
 
 # HOMEWORK: TIC TAC TOE
 
-### Your Mission 💪:
- * #### Build Tic Tac Toe from scratch! ❌੦
+### Your Mission: Build Tic Tac Toe from scratch! ❌੦
 
 Over the weekend, you will plan, pseudo code, and implement your first game!!!
 
 This is a great stepping stone to creating your Unit One project and an excellent opportunity to plan and breakdown a problem first on paper, to understand its components before tackling the code.
 
+## Before writing a line of code...
 
 ### We encourage you to 🤓:
 *  Play the game with the neighbor while thinking of the game logic.
 * Whiteboard **ALL** the components your game will require!
 * Pseudocode the complete logic to the last step
-
-#### before writing a line of code!!!
 
 ### Things to think about 🤔:
 - What is Tic Tac Toe? How is it played?
