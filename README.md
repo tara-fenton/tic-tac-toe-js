@@ -40,8 +40,8 @@ Which of these tools you are going to need to build this game?
 - You have an `index.html`, a `main.js`, and a `style.css`. (Maybe also a `reset.css`? 🤔)
 - Your tic-tac-toe is playable in the DOM
 - Your tic-tac-toe can be won and lost
-- You **must** use `.map`. `.filter`, **or** `.reduce`.
-- Your game should be played by 2 people taking turns 👍
+- You **must** use `.map`. `.filter`, **or** `.reduce`. (Suggestion: Make it work without using an array method first, then see where you can refactor it to include an array method.)
+- Your game should be playable by 2 people taking turns 👍
 - You've uploaded your completed tic tac toe game to [BitBalloon](https://www.bitballoon.com/)
 
 ## 🚀 Your homework submission should include:
