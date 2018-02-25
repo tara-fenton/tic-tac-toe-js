@@ -3,12 +3,11 @@ var rowCount = 6;
 var colCount = 7;
 var connect = 4;
 var board = [];
-var round = 0;
 var player = 1;
-var $containerDiv = $('body').append("<div id='container' width='400px'></div>");
-$('#container').css('width', "400");
-var $dropDiv = $('#container').append("<div id='drop' width='400px'></div>");
-$('#drop').css('width', "400");
+var $containerDiv = $('body').append("<div id='container'></div>");
+// $('#container').css('width', "400");
+var $dropDiv = $('#container').append("<div id='drop'></div>");
+// $('#drop').css('width', "400");
 function makeBoard(rowCount, colCount) {
   var rows = [];
   for (var i = 0; i < rowCount; i++) {
@@ -16,7 +15,7 @@ function makeBoard(rowCount, colCount) {
     for (var j = 0; j < colCount; j++) {
       rows.push(0);
     $('#container').append("<div class='boxes' id='box" + i+j + "'>" + i+j + "</div>");
-    $('#box'+i+j).css({"border": "4px solid black", "width": "20", "height": "20", "display": "inline-block"});
+    // $('#box'+i+j).css({"border": "4px solid black", "width": "20", "height": "20", "display": "inline-block"});
     // adds event listener for clicking on the individual divs
     //$('#box'+i+j).on('click', boxClick);
 
