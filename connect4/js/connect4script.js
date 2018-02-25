@@ -3,17 +3,31 @@ var rowCount = 6;
 var colCount = 7;
 var connect = 4;
 var board = [];
+var round = 0;
+var $containerDiv = $('body').append("<div id='container' width='400px'></div>");
+$('#container').css('width', "400");
 function makeBoard(rowCount, colCount) {
   var rows = [];
-  for (var i = 0; i < rowCount; i++) {
+  for (var i = 0; i <= rowCount; i++) {
+
     for (var j = 0; j < colCount; j++) {
       rows.push(0);
+    $('#container').append("<div class='boxes' id='box" + i+j + "'>" + i+j + "</div>");
+    $('#box'+i+j).css({"border": "4px solid black", "width": "20", "height": "20", "display": "inline-block"});
+    // adds event listener for clicking on the individual divs
+    $('#box'+i+j).on('click', boxClick);
+
+
+
     }
     // push the row into the board
     board.push(rows);
+    $('#container').append('<br>');
     // reset the row
     rows=[];
   }
+}
+function boxClick(evt) {
 }
 makeBoard(rowCount, colCount);
 console.log(board);
@@ -132,6 +146,6 @@ function checkForAWin() {
     console.log("winner! "+winner)
   }
 }
-checkForAWin();
+//checkForAWin();
 // select the column to drop the players pick
 
