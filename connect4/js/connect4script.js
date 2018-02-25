@@ -43,6 +43,8 @@ function boxClick(evt) {
       console.log('im empty')
       //push the players id in the board array at the open position
       board[col][index] = player;
+      // add player red/black style to open div
+      $('#box'+col+index).text(player);
       break;
       console.log(board);
 
@@ -133,8 +135,6 @@ function checkHorizontal() {
   }
 }
 
-var rowCount = 6;
-var colCount = 7;
 // diagonial winStates
 function checkDiagonialDown() {
   // loop through the rows
@@ -177,8 +177,8 @@ function checkDiagonialUp() {
 function checkForAWin() {
   checkVertical();
   checkHorizontal();
-  //checkDiagonialDown();
-  //checkDiagonialUp();
+  checkDiagonialDown();
+  checkDiagonialUp(); //up backwards
   if (winner === 0) {
     console.log("no winner :(")
   } else {
