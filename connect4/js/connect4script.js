@@ -4,18 +4,21 @@ var colCount = 7;
 var connect = 4;
 var board = [];
 var round = 0;
+var player = 1;
 var $containerDiv = $('body').append("<div id='container' width='400px'></div>");
 $('#container').css('width', "400");
+var $dropDiv = $('#container').append("<div id='drop' width='400px'></div>");
+$('#drop').css('width', "400");
 function makeBoard(rowCount, colCount) {
   var rows = [];
-  for (var i = 0; i <= rowCount; i++) {
+  for (var i = 0; i < rowCount; i++) {
 
     for (var j = 0; j < colCount; j++) {
       rows.push(0);
     $('#container').append("<div class='boxes' id='box" + i+j + "'>" + i+j + "</div>");
     $('#box'+i+j).css({"border": "4px solid black", "width": "20", "height": "20", "display": "inline-block"});
     // adds event listener for clicking on the individual divs
-    $('#box'+i+j).on('click', boxClick);
+    //$('#box'+i+j).on('click', boxClick);
 
 
 
@@ -27,10 +30,46 @@ function makeBoard(rowCount, colCount) {
     rows=[];
   }
 }
+// select the column to drop the players pick
 function boxClick(evt) {
+  //change the player
+  if (player === 1) { player = 2; } else { player = 1; }
+  console.log("clicked "+evt.target.id);
+  var index = Number(evt.target.id.charAt(4));
+  //check the position of the first available from the bottom
+  for (var col = rowCount - 1; col >= 0; col--) {
+    console.log(col, board[col][index])
+    if (board[col][index] === 0) {
+      console.log('im empty')
+      //push the players id in the board array at the open position
+      board[col][index] = player;
+      break;
+      console.log(board);
+
+      //return checkForAWin();
+    }
+  }
+  //check for a win
+  checkForAWin();
+
+
+
+  //console.log(player);
+
+
+
 }
 makeBoard(rowCount, colCount);
-console.log(board);
+
+function makeDropRow() {
+  for (var i = 0; i <= rowCount; i++) {
+    $('#drop').append("<div class='dropRow' id='drop" + i + "'></div>");
+    $('#drop'+i).css({"border": "4px solid red", "width": "20", "height": "20", "display": "inline-block"});
+    // adds event listener for clicking on the individual divs
+    $('#drop'+i).on('click', boxClick);
+  }
+}
+makeDropRow();
 // make the board dynamic
 // first check complete
 // var board = [
@@ -138,14 +177,13 @@ function checkDiagonialUp() {
 function checkForAWin() {
   checkVertical();
   checkHorizontal();
-  checkDiagonialDown();
-  checkDiagonialUp();
+  //checkDiagonialDown();
+  //checkDiagonialUp();
   if (winner === 0) {
     console.log("no winner :(")
   } else {
     console.log("winner! "+winner)
   }
 }
-//checkForAWin();
-// select the column to drop the players pick
+
 
