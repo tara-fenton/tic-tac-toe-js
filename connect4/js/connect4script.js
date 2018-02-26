@@ -3,14 +3,16 @@ var rowCount = 6;//6
 var colCount = 7;//7
 var connect = 4;
 var board = [];
+var rows = [];
 var player = 2;
+var winner = 0;
 var $containerDiv = $('body').append("<div id='container'></div>");
 var $winDiv = $('#container').append("<div id='win'></div>");
 var $dropDiv = $('#container').append("<div id='drop'></div>");
 var $boardDiv = $('#container').append("<div id='board'></div>");
+var $playAgainDiv = $('#container').append("<div id='playAgain'></div>");
 
 function makeBoard(rowCount, colCount) {
-  var rows = [];
   for (var i = 0; i < rowCount; i++) {
     for (var j = 0; j < colCount; j++) {
       rows.push(0);
@@ -33,7 +35,17 @@ function makeDropRow() {
   }
 }
 makeDropRow();
-
+//remove and add drop row events for end of game and play again
+function removeDropRowEvents() {
+  for (var i = 0; i <= rowCount; i++) {
+    $('#drop'+i).off('click', boxClick);
+  }
+}
+function addDropRowEvents() {
+  for (var i = 0; i <= rowCount; i++) {
+    $('#drop'+i).on('click', boxClick);
+  }
+}
 // select the column to drop the players pick
 function boxClick(evt) {
   //change the player
@@ -53,8 +65,36 @@ function boxClick(evt) {
   checkForAWin();
 }
 
+function playAgain() {
+  //place a button on the page
+  $('#playAgain').append("<button>Play Again</button>");
+  $('#playAgain').on('click', playAgainClick);
+}
+function playAgainClick() {
+  //reset the board's array
+  board=[];
+  for (var i = 0; i < rowCount; i++) {
+    for (var j = 0; j < colCount; j++) {
+      // reset the board's styles
+      $("#box" + i+j).removeClass("player1");
+      $("#box" + i+j).removeClass("player2");
+      rows.push(0);
+    }
+    board.push(rows);
+    rows=[];
+  }
+  // add the drop events back
+  removeDropRowEvents(); // if there wasn't a winner to reset it
+  addDropRowEvents();
+  // reset the winner and winner text
+  winner = 0;
+  $('#win').text("");
+  //reset the player
+  player = 2;
+}
+playAgain();
 /////////////////////// CHECK FOR WINSTATES ///////////////////////////
-var winner = 0;
+
 // VERTICAL WIN - dont have to check all the way to the bottom
 // so only check the top rows (rowCount - connect)
 // and check all the columns
@@ -152,6 +192,7 @@ function checkForAWin() {
     if (winner === 2) {
       $('#win').addClass('player2win');
     }
+    removeDropRowEvents();
   }
 }
 
