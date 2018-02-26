@@ -1,4 +1,4 @@
-/////////////////////// CREATE THE BOARD //////////////////////////////
+/////////////////////// GLOBALS ///////////////////////////////////////
 var rowCount = 6;//6
 var colCount = 7;//7
 var connect = 4;
@@ -6,12 +6,13 @@ var board = [];
 var rows = [];
 var player = 2;
 var winner = 0;
+var round = 0;
 var $containerDiv = $('body').append("<div id='container'></div>");
 var $winDiv = $('#container').append("<div id='win'></div>");
 var $dropDiv = $('#container').append("<div id='drop'></div>");
 var $boardDiv = $('#container').append("<div id='board'></div>");
 var $playAgainDiv = $('#container').append("<div id='playAgain'></div>");
-
+/////////////////////// CREATE THE BOARD //////////////////////////////
 function makeBoard(rowCount, colCount) {
   for (var i = 0; i < rowCount; i++) {
     for (var j = 0; j < colCount; j++) {
@@ -26,7 +27,7 @@ function makeBoard(rowCount, colCount) {
   }
 }
 makeBoard(rowCount, colCount);
-
+/////////////////////// DROP ROW //////////////////////////////////////
 function makeDropRow() {
   for (var i = 0; i <= rowCount; i++) {
     $('#drop').append("<div class='dropRow' id='drop" + i + "'></div>");
@@ -61,10 +62,11 @@ function boxClick(evt) {
       break;
     }
   }
+  round++;
   //check for a win
   checkForAWin();
 }
-
+/////////////////////// PLAY AGAIN - RESET GAME ///////////////////////
 function playAgain() {
   //place a button on the page
   $('#playAgain').append("<button>Play Again</button>");
@@ -91,10 +93,11 @@ function playAgainClick() {
   $('#win').text("");
   //reset the player
   player = 2;
+  //reset win class style
+  $('#win').removeClass('player2win');
 }
 playAgain();
 /////////////////////// CHECK FOR WINSTATES ///////////////////////////
-
 // VERTICAL WIN - dont have to check all the way to the bottom
 // so only check the top rows (rowCount - connect)
 // and check all the columns
@@ -104,12 +107,10 @@ function checkVertical() {
     // loop through the columns
       for (var col = 0; col < colCount; col++) {
       // checking for 4 down
-      //console.log("checking "+board[row][col]);
       if (board[row][col] != 0 &&
           board[row][col] === board[row+1][col] &&
           board[row][col] === board[row+2][col] &&
           board[row][col] === board[row+3][col]) {
-        console.log("winner!"+board[row][col])
         winner = board[row][col];
         return board[row][col];
       }
@@ -125,12 +126,10 @@ function checkHorizontal() {
     // loop through the columns
     for (var col = 0; col <= colCount - connect; col++) {
       // checking for 4 across
-      //console.log("checking "+board[row][col]);
       if (board[row][col] != 0 &&
           board[row][col] === board[row][col+1] &&
           board[row][col] === board[row][col+2] &&
           board[row][col] === board[row][col+3]) {
-        console.log("winner!"+board[row][col])
         winner = board[row][col];
         return board[row][col];
       }
@@ -147,12 +146,10 @@ function checkDiagonialDown() {
     // loop through the columns
     for (var col = 0; col <= colCount - connect; col++) {
       // checking for 4 diagonial top down
-      //console.log("checking "+board[row][col]);
       if (board[row][col] != 0 &&
           board[row][col] === board[row+1][col+1] &&
           board[row][col] === board[row+2][col+2] &&
           board[row][col] === board[row+3][col+3]) {
-        console.log("winner!"+board[row][col])
         winner = board[row][col];
         return board[row][col];
       }
@@ -170,12 +167,10 @@ function checkDiagonialUp() {
     // loop through the columns
     for (var col = 0; col <= colCount - connect; col++) {
       // checking for 4 diagonial up
-      //console.log("checking "+board[row][col]);
       if (board[row][col] != 0 &&
           board[row][col] === board[row-1][col+1] &&
           board[row][col] === board[row-2][col+2] &&
           board[row][col] === board[row-3][col+3]) {
-        console.log("winner!"+board[row][col])
         winner = board[row][col];
         return board[row][col];
       }
@@ -189,10 +184,14 @@ function checkForAWin() {
   checkDiagonialUp();
   if (winner !== 0) {
     $('#win').text("Player "+winner+" is the winner!!!!");
+    // set the text to red for player 2
     if (winner === 2) {
       $('#win').addClass('player2win');
     }
-    removeDropRowEvents();
+    removeDropRowEvents(); // stops the game, no more events
+  }
+  if (round === 42) { //21 rounds per player
+    $('#win').text("DRAW!!!! No winner!!!!");
   }
 }
 
