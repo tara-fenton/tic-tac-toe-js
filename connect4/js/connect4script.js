@@ -3,8 +3,9 @@ var rowCount = 6;//6
 var colCount = 7;//7
 var connect = 4;
 var board = [];
-var player = 1;
+var player = 2;
 var $containerDiv = $('body').append("<div id='container'></div>");
+var $winDiv = $('#container').append("<div id='win'></div>");
 var $dropDiv = $('#container').append("<div id='drop'></div>");
 var $boardDiv = $('#container').append("<div id='board'></div>");
 
@@ -147,7 +148,10 @@ function checkForAWin() {
   checkDiagonialDown();
   checkDiagonialUp();
   if (winner !== 0) {
-    alert("winner! "+winner);
+    $('#win').text("Player "+winner+" is the winner!!!!");
+    if (winner === 2) {
+      $('#win').addClass('player2win');
+    }
   }
 }
 

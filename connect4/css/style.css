@@ -35,6 +35,13 @@ p {
   width: 250px;
   margin: 10px auto;
 }
+#win {
+  font-size: 26px;
+  text-align: center;
+  padding: 0 0 12px 0;
+  height: 30px;
+}
+
 #drop {
   line-height: 0;
   background-color: blue;
@@ -69,9 +76,15 @@ p {
 }
 
 .player1 {
-  background: red;
+  background: black;
 }
 
 .player2 {
-  background: black;
+  background: red;
 }
+
+.player2win {
+  color: red;
+}
+
+
